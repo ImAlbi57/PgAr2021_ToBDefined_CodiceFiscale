@@ -6,9 +6,9 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamReader;
 
 public abstract class GestoreXMLReader {
-	private XMLInputFactory xmlif = null;
-    private XMLStreamReader xmlr = null;
-    private String path;
+	protected XMLInputFactory xmlif = null;
+	protected XMLStreamReader xmlr = null;
+	protected String path;
 
     public GestoreXMLReader(String path){
         this.path = path;

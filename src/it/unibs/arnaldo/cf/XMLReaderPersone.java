@@ -21,35 +21,35 @@ public class XMLReaderPersone extends GestoreXMLReader {
 
         try {
             //Prendo il numero di persone
-            while(getXmlr().hasNext() && (getXmlr().getEventType() != XMLStreamConstants.START_ELEMENT || !getXmlr().getLocalName().equals("persone")))
-                getXmlr().next();
-            nPersone = Integer.parseInt(getXmlr().getAttributeValue(0));
+            while(xmlr.hasNext() && (xmlr.getEventType() != XMLStreamConstants.START_ELEMENT || !xmlr.getLocalName().equals("persone")))
+                xmlr.next();
+            nPersone = Integer.parseInt(xmlr.getAttributeValue(0));
 
-            while(getXmlr().hasNext()){
+            while(xmlr.hasNext()){
                 //Ogni persona
-                if(getXmlr().getEventType() == XMLStreamConstants.START_ELEMENT && getXmlr().getLocalName().equals("persona")){
-                    id = Integer.parseInt(getXmlr().getAttributeValue(0));
-                    getXmlr().next();getXmlr().next();
+                if(xmlr.getEventType() == XMLStreamConstants.START_ELEMENT && xmlr.getLocalName().equals("persona")){
+                    id = Integer.parseInt(xmlr.getAttributeValue(0));
+                    xmlr.next();xmlr.next();
 
                     //finisco di ciclare quando trovo il tag di chiusura di persona
-                    while(getXmlr().getEventType() != XMLStreamConstants.END_ELEMENT || !getXmlr().getLocalName().equals("persona")){
+                    while(xmlr.getEventType() != XMLStreamConstants.END_ELEMENT || !xmlr.getLocalName().equals("persona")){
                         //prendo il tipo di tag
-                        String src = getXmlr().getLocalName();
+                        String src = xmlr.getLocalName();
                         //vado al valore
-                        getXmlr().next();
+                        xmlr.next();
                         switch (src) {
-                            case "nome": nome = getXmlr().getText(); break;
-                            case "cognome": cognome = getXmlr().getText(); break;
-                            case "sesso": sesso = getXmlr().getText().toUpperCase(); break;
-                            case "comune_nascita": comune = getXmlr().getText(); break;
-                            case "data_nascita": data = getXmlr().getText(); break;
+                            case "nome": nome = xmlr.getText(); break;
+                            case "cognome": cognome = xmlr.getText(); break;
+                            case "sesso": sesso = xmlr.getText().toUpperCase(); break;
+                            case "comune_nascita": comune = xmlr.getText(); break;
+                            case "data_nascita": data = xmlr.getText(); break;
                         }
                         //salto gli spazi inutili
-                        getXmlr().next();getXmlr().next();getXmlr().next();
+                        xmlr.next();xmlr.next();xmlr.next();
                     }
                     persone.addPersona(new Persona(id, cognome, nome, sesso, data, comune));
                 }
-                getXmlr().next();
+                xmlr.next();
             }
         }catch (Exception e){
             System.out.println(e);
