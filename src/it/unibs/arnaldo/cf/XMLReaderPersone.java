@@ -1,5 +1,5 @@
 package it.unibs.arnaldo.cf;
 
-public class XMLReaderPersone {
-
+public class XMLReaderPersone extends GestoreXMLReader {
+	
 }
