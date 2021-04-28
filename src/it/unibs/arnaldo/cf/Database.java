@@ -16,4 +16,9 @@ public class Database {
 	public void addPersona(Persona p) {
 		persone.add(p);
 	}
+	
+	public void printAll() {
+		for(Persona p : persone)
+			System.out.println(p);
+	}
 }

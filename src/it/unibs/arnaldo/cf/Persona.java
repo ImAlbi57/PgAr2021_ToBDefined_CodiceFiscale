@@ -20,12 +20,16 @@ public class Persona {
 		this.sesso = Sesso.valueOf(sesso);
 		this.anno = Integer.parseInt(nascita.substring(0,4));
 		this.mese = Integer.parseInt(nascita.substring(5,7));
-		this.giorno = Integer.parseInt(nascita.substring(1,0));
+		this.giorno = Integer.parseInt(nascita.substring(8,10));
 		this.comune = comune;
 	}
 	
 	public void genCodiceFiscale() {
 		this.cf = new CodiceFiscale(cognome, nome, sesso, anno, mese, giorno, comune);
+	}
+	
+	public String toString() {
+		return cognome + " " + nome;
 	}
 	
 }

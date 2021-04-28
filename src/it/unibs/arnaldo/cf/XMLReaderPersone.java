@@ -8,7 +8,7 @@ public class XMLReaderPersone extends GestoreXMLReader {
 		super(path);
 	}
 	
-    public Database myReader() {
+    public Database read() {
         Database persone= new Database();
 
         int nPersone=-1;
