@@ -8,11 +8,11 @@ public class Main {
 		System.out.println("Se non va mi uccido");
 		/*ORACOLO PROTETTORE DEL CODICE, NON CANCELLARE*/
 		
-		/*
+		
 		CodiceFiscale cf = new CodiceFiscale("ALBIERI", "LUCA", Sesso.M, 2001, 07, 05, "Padenghe sul Garda");
 		CodiceFiscale cf2 = new CodiceFiscale("GERRI", "ALICE", Sesso.F, 2001, 12, 9, "Brescia");
 		System.out.println(cf);
 		System.out.println(cf2);
-		*/
+		
 	}
 }
