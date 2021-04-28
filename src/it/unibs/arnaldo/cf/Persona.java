@@ -3,6 +3,7 @@ package it.unibs.arnaldo.cf;
 public class Persona {
 	public enum Sesso {M, F};
 	
+	private int id;
 	private String cognome;
 	private String nome;
 	private Sesso sesso;
@@ -12,7 +13,8 @@ public class Persona {
 	private String comune;
 	private CodiceFiscale cf;
 	
-	public Persona(String cognome, String nome, String sesso, String nascita, String comune) {
+	public Persona(int id, String cognome, String nome, String sesso, String nascita, String comune) {
+		this.id = id;
 		this.cognome = cognome;
 		this.nome = nome;
 		this.sesso = Sesso.valueOf(sesso);
