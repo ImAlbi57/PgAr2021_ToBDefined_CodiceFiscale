@@ -14,14 +14,16 @@ public class Main {
 		System.out.println(cf2);
 		System.out.println(cf3);
 		
+		ElencoComuni.printAll();
 		System.out.println(ElencoComuni.getCodice("Padenghe sul Garda"));
 		*/
 		
 		XMLReaderPersone xmlr = new XMLReaderPersone("inputPersone.xml");
 		Database persone = xmlr.read();
 		persone.genAll();
-		persone.printAll();
-
+		persone.readCfs();
+		//persone.printAllPersone();
+		persone.printAllCFs();
 		
 	}
 }

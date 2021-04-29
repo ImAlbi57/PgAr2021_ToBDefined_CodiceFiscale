@@ -4,17 +4,20 @@ import java.util.ArrayList;
 
 public class Database {
 	private ArrayList<Persona> persone;
+	private ArrayList<String> cfs;
 	
 	public Database() {
 		this.persone = new ArrayList<Persona>();
+		cfs = null;
 	}
-	/*
-	public Database(ArrayList<Persona> persone) {
-		this.persone = persone;
-	}*/
 	
 	public void addPersona(Persona p) {
 		persone.add(p);
+	}
+	
+	public void readCfs() {
+		XMLReaderCF xmlrc = new XMLReaderCF("codiciFiscali.xml");
+		cfs = xmlrc.read();
 	}
 	
 	public void genAll() {
@@ -22,8 +25,18 @@ public class Database {
 			p.genCodiceFiscale();
 	}
 	
-	public void printAll() {
+	public boolean cmpAll() {
+		boolean ris = false;
+		//METODO DA CREARE
+		return ris;
+	}
+	
+	public void printAllPersone() {
 		for(Persona p : persone)
 			System.out.println(p);
+	}
+	public void printAllCFs() {
+		for(String s : cfs)
+			System.out.println(s);
 	}
 }

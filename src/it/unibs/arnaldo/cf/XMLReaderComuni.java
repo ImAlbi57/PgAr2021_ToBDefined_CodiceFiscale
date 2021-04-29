@@ -3,7 +3,6 @@ package it.unibs.arnaldo.cf;
 import java.util.HashMap;
 
 import javax.xml.stream.XMLStreamConstants;
-import javax.xml.stream.XMLStreamException;
 
 public class XMLReaderComuni extends GestoreXMLReader {
 
@@ -11,7 +10,7 @@ public class XMLReaderComuni extends GestoreXMLReader {
 		super(path);
 	}
 	
-	public HashMap<String,String> read() throws XMLStreamException {
+	public HashMap<String,String> read() {
 		HashMap<String,String> comuni = new HashMap<String, String>();
 		String nome = "";
 		String codice = "";
@@ -39,12 +38,10 @@ public class XMLReaderComuni extends GestoreXMLReader {
 	    		}
 	    		xmlr.next();
 	    	}
-	    	
-	    	
 	    }
 	    catch(Exception e) {
 	    	System.out.println(e);
 	    }
 	    return comuni;
-	}	
+	}
 }

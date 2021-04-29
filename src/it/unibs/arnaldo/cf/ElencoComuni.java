@@ -20,9 +20,11 @@ public class ElencoComuni {
 	}
 	
 	public static void printAll() {
-		comuni.entrySet().forEach(entry -> {
-		    System.out.println(entry.getKey() + " " + entry.getValue());
-		});
+		for (String comune: comuni.keySet()) {
+		    String key = comune.toString();
+		    String value = comuni.get(comune).toString();
+		    System.out.println(key + " " + value);
+		}
 	}
 
 }
