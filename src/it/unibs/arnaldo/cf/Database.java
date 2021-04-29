@@ -17,6 +17,11 @@ public class Database {
 		persone.add(p);
 	}
 	
+	public void genAll() {
+		for(Persona p : persone)
+			p.genCodiceFiscale();
+	}
+	
 	public void printAll() {
 		for(Persona p : persone)
 			System.out.println(p);

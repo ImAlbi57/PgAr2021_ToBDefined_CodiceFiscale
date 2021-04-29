@@ -1,7 +1,6 @@
 package it.unibs.arnaldo.cf;
 
 import java.io.FileInputStream;
-
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamReader;
 

@@ -4,7 +4,6 @@ import it.unibs.arnaldo.cf.Persona.Sesso;
 
 public class CodiceFiscale {
 	private String cf;
-	private char controllo;
 	
 	/**
 	* Metodo costruttore della classe CodiceFiscale,
@@ -42,7 +41,7 @@ public class CodiceFiscale {
 		
 		
 		//Comune, necessaria la lettura da tastiera
-		parts[5] = "D284";
+		parts[5] = ElencoComuni.getCodice(comune);
 		
 		//Codice di controllo
 		parts[6] = "" + getControllo(new String(parts[0] + parts[1] + parts[2] + parts[3] + parts[4] + parts[5]));

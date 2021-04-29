@@ -22,6 +22,7 @@ public class Persona {
 		this.mese = Integer.parseInt(nascita.substring(5,7));
 		this.giorno = Integer.parseInt(nascita.substring(8,10));
 		this.comune = comune;
+		this.cf = null;
 	}
 	
 	public void genCodiceFiscale() {
@@ -29,7 +30,7 @@ public class Persona {
 	}
 	
 	public String toString() {
-		return cognome + " " + nome;
+		return cognome + " " + nome + (cf != null ? " " + cf : "");
 	}
 	
 }

@@ -23,7 +23,7 @@ public class XMLReaderPersone extends GestoreXMLReader {
             //Prendo il numero di persone
             while(xmlr.hasNext() && (xmlr.getEventType() != XMLStreamConstants.START_ELEMENT || !xmlr.getLocalName().equals("persone")))
                 xmlr.next();
-            nPersone = Integer.parseInt(xmlr.getAttributeValue(0));
+            //nPersone = Integer.parseInt(xmlr.getAttributeValue(0));
 
             while(xmlr.hasNext()){
                 //Ogni persona
@@ -53,7 +53,7 @@ public class XMLReaderPersone extends GestoreXMLReader {
             }
         }catch (Exception e){
             System.out.println(e);
-        };
+        }
 
         return persone;
     }	
