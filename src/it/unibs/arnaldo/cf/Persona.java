@@ -29,6 +29,10 @@ public class Persona {
 		this.cf = new CodiceFiscale(cognome, nome, sesso, anno, mese, giorno, comune);
 	}
 	
+	public String getCf() {
+		return cf.toString();
+	}
+	
 	public String toString() {
 		return cognome + " " + nome + (cf != null ? " " + cf : "");
 	}

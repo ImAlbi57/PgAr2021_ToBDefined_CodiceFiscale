@@ -20,15 +20,33 @@ public class Database {
 		cfs = xmlrc.read();
 	}
 	
+	public ArrayList<String> checkCfs(){
+		ArrayList<String> sbagliati = new ArrayList<String>();
+		for(String cf:cfs) {
+			if(CodiceFiscale.validateCF(cf) == false)
+				sbagliati.add(cf);
+		}
+		return sbagliati;
+	}
+	
 	public void genAll() {
 		for(Persona p : persone)
 			p.genCodiceFiscale();
 	}
 	
 	public boolean cmpAll() {
-		boolean ris = false;
-		//METODO DA CREARE
-		return ris;
+		if(persone.size() != cfs.size())
+			return false;
+		
+		for(int i=0; i<cfs.size(); i++) {
+			String cfNostro = persone.get(i).getCf();
+			String cfXML = cfs.get(i);
+			System.out.println(cfNostro + " " + cfXML);
+			if(!cfNostro.equals(cfXML))
+				return false;
+		}
+		
+		return true;
 	}
 	
 	public void printAllPersone() {

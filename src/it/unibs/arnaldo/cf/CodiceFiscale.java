@@ -53,7 +53,7 @@ public class CodiceFiscale {
 	
 	/*METODI DI UTILITA'*/
 	//Ritorna true se il carattere passato è una vocale
-	public boolean isVowel(char c) {
+	public static boolean isVowel(char c) {
 		String vowels = "AEIOU";
 		return vowels.indexOf(c) != -1;
 	}
@@ -62,16 +62,22 @@ public class CodiceFiscale {
 		String vowels = "0123456789";
 		return vowels.indexOf(c) != -1;
 	}*/	
-	private char getMonth(int mese) {
+	//Ritorna il carattere corrispondente al numero del mese passato
+	private static char getMonth(int mese) {
 		char mesi[] = {'A','B','C','D','E','H','L','M','P','R','S','T'};
 		return mesi[mese-1];
+	}
+	//Ritorna true se il carattere passato rappresenta un mese
+	private static int getMonthPosition(char c) {
+		String mesi = "ABCDEHLMPRST";
+		return mesi.indexOf(c);
 	}
 	
 	
 	/*METODI PER CREARE E CONTROLLARE IL CF*/
 	
 	//Metodo per generare nome e cognome
-	private String generate3Chars(String part) {
+	private static String generate3Chars(String part) {
 		char src[] = part.toCharArray();
 		String chars = "";
 		
@@ -93,7 +99,7 @@ public class CodiceFiscale {
 		return chars;
 	}
 	
-	private char getControllo(String partialCF) {
+	private static char getControllo(String partialCF) {
 		//Caratteri di controllo per le posizioni dispari (vedi tabella), le pari corrispondono al numero/lettera
 		int dispari[] = {1,0,5,7,9,13,15,17,19,21,1,0,5,7,9,13,15,17,19,21,2,4,18,20,11,3,6,8,12,14,16,10,22,25,24,23};
 		int sumDispari = 0;
@@ -119,6 +125,93 @@ public class CodiceFiscale {
 		
 		return (char) ('A' + ris);
 	}
+	
+	
+	public static boolean validateCF(String cf) {
+		//Rimuovo i caratteri inutili e prendo la stringa in maiuscolo
+		cf = cf.trim().toUpperCase();
+		
+		//Se la lunghezza è sbagliata ritorno false, non serve fare altri controlli
+		if(cf.length() != 16)
+			return false;
+		
+		//Creo un array di caratteri dalla nostra stringa
+		char caratteri[] = cf.toCharArray();
+		
+		/*****INIZIO DEI CONTROLLI*****/
+		
+		/*****COGNOME E NOME*****/
+		//Controllo che i primi 6 caratteri siano compresi tra A e Z
+		for(int i=0; i<6; i++)
+			if(caratteri[i] <= 'A' || caratteri[i] >= 'Z')
+				return false;
+		//Controllo la validità dei nomi e dei cognomi
+		String cognome = cf.substring(0,3);
+		String nome = cf.substring(3,6);
+		if(!cognome.equals(generate3Chars(cognome)) || !nome.equals(generate3Chars(nome)))
+			return false;
+		/*****COGNOME E NOME*****/
+		
+		
+		/*****ANNO*****/
+		//Controllo i 2 numeri dell'anno
+		for(int i=6; i<8; i++)
+			if(!Character.isDigit(caratteri[i]))
+				return false;
+		/*****ANNO*****/
+		
+		
+		/*****MESE*****/
+		//Controllo del mese
+		int posizioneMese = getMonthPosition(caratteri[8]);
+		if(posizioneMese == -1)
+			return false;
+		//Prendo la durata del mese per utilizzarla in seguito
+		int durate[] = {31,28,31,30,31,30,31,31,30,31,30,31};
+		int durata = durate[posizioneMese];
+		/*****MESE*****/
+		
+		
+		/*****GIORNO*****/
+		//Controllo i 2 numeri del giorno
+		for(int i=9; i<11; i++)
+			if(!Character.isDigit(caratteri[i]))
+				return false;		
+		//Prendo il giorno e lo parso a intero
+		int d = Integer.parseInt(cf.substring(9, 11));
+		//Caso donna
+		if(d >= 41 && d <= 71) {
+			d -= 40;
+		}
+		//Verifico che il giorno sia valido
+		if(d < 1 || d > durata)
+			return false;
+		/*****GIORNO*****/
+		
+		
+		/*****COMUNE NASCITA*****/
+		//Per evitare di fare la ricerca (costosa) inutilmente, prima verifichiamo se il formato è corretto
+		if(caratteri[11]<'A' || caratteri[11]>'Z')
+			return false;
+		for(int i=12; i<15; i++)
+			if(!Character.isDigit(caratteri[i]))
+				return false;
+		//Controllo il codice del comune di nascita
+		if(!ElencoComuni.isValid(cf.substring(11,15)))
+			return false;
+		/*****COMUNE NASCITA*****/
+		
+		
+		/*****CARATTERE DI CONTROLLO*****/
+		//Controllo il carattere di controllo
+		if(caratteri[15] != getControllo(cf.substring(0,15)))
+			return false;
+		/*****CARATTERE DI CONTROLLO*****/
+		
+		
+		return true;
+	}
+	
 	
 	//Metodo toString
 	public String toString() {

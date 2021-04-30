@@ -19,6 +19,10 @@ public class ElencoComuni {
 		return comuni.get(nome.toUpperCase());
 	}
 	
+	public static boolean isValid(String codice) {
+		return comuni.containsValue(codice);
+	}
+	
 	public static void printAll() {
 		for (String comune: comuni.keySet()) {
 		    String key = comune.toString();
