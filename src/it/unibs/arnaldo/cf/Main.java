@@ -8,6 +8,11 @@ public class Main {
 		
 		ElencoComuni.init();
 		
+		/*
+		Persona p = new Persona(0,"GUZA","ANTONINO", "M", "1967-11-26", "CROPALATI");
+		p.genCodiceFiscale();
+		System.out.println(p.getCf());*/
+		
 		Database db = new Database();
 		db.genAll();
 		db.readCfs();
@@ -15,7 +20,7 @@ public class Main {
 		db.checkCfsSpaiati();
 		db.writeCfs();
 		
-		
+		//db.printAllPersone();
 		/*
 		//PER IL DEBUG
 		CodiceFiscale cf = new CodiceFiscale("ALBIERI", "LUCA", Sesso.M, "2001-07-05", "Desenzano del garda");

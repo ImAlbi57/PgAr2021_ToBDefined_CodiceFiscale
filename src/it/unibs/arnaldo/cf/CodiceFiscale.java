@@ -27,8 +27,8 @@ public class CodiceFiscale {
 		String parts[] = new String[8];
 		
 		//Genero le parti di nome e cognome
-		parts[0] = generate3Chars(cognome);
-		parts[1] = generate3Chars(nome);
+		parts[0] = genCognome(cognome);
+		parts[1] = genNome(nome);
 		
 		
 		//Nascita, genero le varie parti		
@@ -91,11 +91,52 @@ public class CodiceFiscale {
 	
 	/*METODI PER CREARE E CONTROLLARE IL CF*/
 	/**
-	 * Metodo per generare nome e cognome nel codice fiscale 
-	 * @param part stringa contenente il nome o il cognome
-	 * @return stringa contenente i caratteri che nel codice rappresetano il nome e il cognome
+	 * Metodo per generare il nome nel codice fiscale 
+	 * @param part stringa contenente il nome
+	 * @return stringa contenente i caratteri che nel codice rappresetano il nome
 	 */	
-	private static String generate3Chars(String part) {
+	private static String genNome(String part) {
+		char src[] = part.toCharArray();
+		String chars = "";
+		String consonanti = "";
+		
+		//Conto le consonanti
+		for(int i=0; i<src.length; i++)
+			if(!isVowel(src[i]))
+				consonanti+=src[i];
+		
+		//Controllo se ci sono più di 4 consonanti
+		if(consonanti.length() >= 4) {
+			chars = ""+consonanti.charAt(0) + consonanti.charAt(2) + consonanti.charAt(3);
+		}
+		//Altrimenti proseguo normalmente
+		else {
+			//Prima aggiungo le consonanti
+			for(int i=0; i<src.length && chars.length() < 3; i++)
+				if(!isVowel(src[i]))
+					chars += src[i];
+			
+			//Se le consonanti non sono abbastanza aggiungo le vocali
+			if(chars.length() < 3)
+				for(int i=0; i<src.length && chars.length() < 3; i++)
+					if(isVowel(src[i]))
+						chars += src[i];
+			
+			//Se le lettere non bastano aggiungo X
+			for(int i=0; i<src.length && chars.length() < 3; i++)
+				chars += 'X';
+		}
+		
+		return chars;
+	}
+	
+	/*METODI PER CREARE E CONTROLLARE IL CF*/
+	/**
+	 * Metodo per generare il cognome nel codice fiscale 
+	 * @param part stringa contenente il cognome
+	 * @return stringa contenente i caratteri che nel codice rappresetano il cognome
+	 */	
+	private static String genCognome(String part) {
 		char src[] = part.toCharArray();
 		String chars = "";
 		

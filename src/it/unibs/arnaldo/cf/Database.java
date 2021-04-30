@@ -117,6 +117,7 @@ public class Database {
 		
 		while(i < cfs.size()) {
 			pos = getPersonaByCF(cfs.get(i));
+			
 			//se la persona non viene trovata = -1 = cf spaiato
 			if(pos == -1) {
 				cfsSpaiati.add(cfs.get(i));
