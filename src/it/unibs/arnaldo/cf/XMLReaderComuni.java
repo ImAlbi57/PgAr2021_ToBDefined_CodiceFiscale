@@ -37,6 +37,7 @@ public class XMLReaderComuni extends GestoreXMLReader {
                     	case "nome": nome = xmlr.getText(); break;
                     	case "codice": codice = xmlr.getText(); break;
 		    		}
+		    		break;
 
 	    		case XMLStreamConstants.END_ELEMENT: 
 	    			if(!nome.equals("") && !codice.equals("")) {
@@ -44,6 +45,7 @@ public class XMLReaderComuni extends GestoreXMLReader {
 		        		nome = "";
 		        		codice = "";
 		        	}
+	    			break;
 	    		case XMLStreamConstants.COMMENT: break;
 	    		case XMLStreamConstants.CHARACTERS: break;
 	    		}

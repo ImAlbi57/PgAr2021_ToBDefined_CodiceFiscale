@@ -5,21 +5,21 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamReader;
 
 /**
- * Classe astratta che istanzia lo StreamReader
+ * Classe astratta per la lettura
  * @author toBdefined
  *
  */
 public abstract class GestoreXMLReader {
 	
-	//inizializzazione delle variabili
+	//dichiarazione delle variabili
 	protected XMLInputFactory xmlif = null;
 	protected XMLStreamReader xmlr = null;
 	protected String path;
 
 	
 	/**
-	 * Istanziamento dello StreamReader e gestisce le eccezioni
-	 * @param path
+	 * Istanziamento dello StreamReader con gestione delle eccezioni
+	 * @param path percorso del file
 	 */	
     public GestoreXMLReader(String path){
         this.path = path;

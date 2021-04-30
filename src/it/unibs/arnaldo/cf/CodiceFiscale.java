@@ -23,10 +23,8 @@ public class CodiceFiscale {
 	* @param  giorno  21
 	* @param  comune  Brescia
 	*/
-	public CodiceFiscale(String cognome, String nome, Sesso sesso, int anno, int mese, int giorno, String comune) {
-		
+	public CodiceFiscale(String cognome, String nome, Sesso sesso, String nascita, String comune) {
 		/*PROCEDURA PER GENERARE IL CF DATE LE INFO DELLA PERSONA*/
-		
 		String parts[] = new String[8];
 		
 		//Genero le parti di nome e cognome
@@ -34,12 +32,13 @@ public class CodiceFiscale {
 		parts[1] = generate3Chars(nome);
 		
 		
-		//Nascita, genero le varie parti
-		//ANNO (scarto le prime 2 cifre) 
-		parts[2] = String.format("%2s", Integer.toString(anno).substring(2));
+		//Nascita, genero le varie parti		
+		//ANNO (scarto le prime 2 cifre)
+		parts[2] = String.format("%2s", nascita.substring(2,4));
 		//MESE 
-		parts[3] = "" + getMonth(mese);
+		parts[3] = "" + getMonth(Integer.parseInt(nascita.substring(5,7)));
 		//GIORNO
+		int giorno = Integer.parseInt(nascita.substring(8,10));
 		//Se è donna, aggiungo 40
 		if(sesso == Sesso.F)
 			giorno += 40;

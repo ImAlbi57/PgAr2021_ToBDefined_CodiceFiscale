@@ -7,21 +7,18 @@ public class Persona {
 	private String cognome;
 	private String nome;
 	private Sesso sesso;
-	private int anno;
-	private int mese;
-	private int giorno;
+	private String nascita;
 	private String comune;
 	private CodiceFiscale cf;
 	private boolean assente;
 	
+	//Metodo costruttore di persona
 	public Persona(int id, String cognome, String nome, String sesso, String nascita, String comune) {
 		this.id = id;
 		this.cognome = cognome;
 		this.nome = nome;
 		this.sesso = Sesso.valueOf(sesso);
-		this.anno = Integer.parseInt(nascita.substring(0,4));
-		this.mese = Integer.parseInt(nascita.substring(5,7));
-		this.giorno = Integer.parseInt(nascita.substring(8,10));
+		this.nascita = nascita;
 		this.comune = comune;
 		this.cf = null;
 		this.assente = true;
@@ -35,7 +32,7 @@ public class Persona {
 	}
 	
 	public void genCodiceFiscale() {
-		this.cf = new CodiceFiscale(cognome, nome, sesso, anno, mese, giorno, comune);
+		this.cf = new CodiceFiscale(cognome, nome, sesso, nascita, comune);
 	}
 	
 	public String toString() {
@@ -59,7 +56,7 @@ public class Persona {
 		return comune;
 	}
 	public String getNascita() {
-		return ""+anno+"-"+mese+"-"+giorno;
+		return nascita;
 	}
 	public String getCf() {
 		return cf.toString();

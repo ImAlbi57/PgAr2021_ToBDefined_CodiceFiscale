@@ -6,32 +6,26 @@ public class Main {
 		System.out.println("Se non va mi uccido");
 		/*ORACOLO PROTETTORE DEL CODICE, NON CANCELLARE*/
 		
-		/*
-		CodiceFiscale cf = new CodiceFiscale("ALBIERI", "LUCA", Sesso.M, 2001, 07, 05, "Desenzano del garda");
-		CodiceFiscale cf2 = new CodiceFiscale("GERRI", "ALICE", Sesso.F, 2001, 12, 9, "Brescia");
-		CodiceFiscale cf3 = new CodiceFiscale("FRANZONI", "GABRIELE", Sesso.M, 2001, 05, 03, "Gavardo");
-		System.out.println(cf);
-		System.out.println(cf2);
-		System.out.println(cf3);
-		
-		ElencoComuni.printAll();
-		System.out.println(ElencoComuni.getCodice("Padenghe sul Garda"));
-		*/
-		
-		XMLReaderPersone xmlr = new XMLReaderPersone("inputPersone.xml");
-		Database db = xmlr.read();
+		Database db = new Database();
 		db.genAll();
 		db.readCfs();
 		db.checkCfsValidi();
 		db.checkCfsSpaiati();
-		//persone.checkPresenza();
-		//persone.printAllPersone();
-		//persone.printAllPresenti();
-		//persone.printAllCFs();
-		//persone.printAllCFsSpaiati();
+		db.writeCfs();
 		
-		GestoreXMLWriter xmlw = new GestoreXMLWriter("codiciPersone.xml");
-		xmlw.scriviXML(db.getPersone(), db.getCfsInvalidi(), db.getCfsSpaiati());
-		System.out.println("FINE");
+		
+		/*
+		//PER IL DEBUG
+		CodiceFiscale cf = new CodiceFiscale("ALBIERI", "LUCA", Sesso.M, "2001-07-05", "Desenzano del garda");
+		System.out.println(cf);
+		
+		//ElencoComuni.printAll();
+		System.out.println(ElencoComuni.getCodice("Padenghe sul Garda"));
+		
+		//db.printAllPersone();
+		//db.printAllPresenti();
+		//db.printAllCFs();
+		//db.printAllCFsSpaiati();
+		*/		
 	}
 }

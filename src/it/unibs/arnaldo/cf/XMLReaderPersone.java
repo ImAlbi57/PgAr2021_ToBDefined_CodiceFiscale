@@ -1,5 +1,7 @@
 package it.unibs.arnaldo.cf;
 
+import java.util.ArrayList;
+
 import javax.xml.stream.XMLStreamConstants;
 
 
@@ -20,53 +22,53 @@ public class XMLReaderPersone extends GestoreXMLReader {
 	 * Lettura dei dati delle persone con successivo inserimento nell'ArrayList
 	 * @return l'ArrayList persone
 	 */
-    public Database read() {
-        Database persone= new Database();
+	public ArrayList<Persona> read() {
+		ArrayList<Persona> persone = new ArrayList<Persona>();
 
-        int nPersone=-1;
+        //int nPersone=-1;
         int id = -1;
         String nome = "";
         String cognome = "";
         String sesso = null;
         String comune = "";
         String data = "";
+		
+	    try {
+	    	while (xmlr.hasNext()) {
+	    		switch (xmlr.getEventType()) {
+	    		case XMLStreamConstants.START_DOCUMENT: break;
+	    		case XMLStreamConstants.START_ELEMENT:
+	    			String src = xmlr.getLocalName();
+	    			if(src.equals("persona"))
+	                    id = Integer.parseInt(xmlr.getAttributeValue(0));
+		    		xmlr.next();
+		    		switch (src) {
+		    			case "nome": nome = xmlr.getText().trim().toUpperCase(); break;
+		    			case "cognome": cognome = xmlr.getText().trim().toUpperCase(); break;
+		    			case "sesso": sesso = xmlr.getText().toUpperCase().trim().toUpperCase(); break;
+		    			case "comune_nascita": comune = xmlr.getText().trim().toUpperCase(); break;
+		    			case "data_nascita": data = xmlr.getText().trim(); break;
+		    		}break;
 
-        try {
-            //Prendo il numero di persone
-            while(xmlr.hasNext() && (xmlr.getEventType() != XMLStreamConstants.START_ELEMENT || !xmlr.getLocalName().equals("persone")))
-                xmlr.next();
-            //nPersone = Integer.parseInt(xmlr.getAttributeValue(0));
-
-            while(xmlr.hasNext()){
-                //Ogni persona
-                if(xmlr.getEventType() == XMLStreamConstants.START_ELEMENT && xmlr.getLocalName().equals("persona")){
-                    id = Integer.parseInt(xmlr.getAttributeValue(0));
-                    xmlr.next();xmlr.next();
-
-                    //finisco di ciclare quando trovo il tag di chiusura di persona
-                    while(xmlr.getEventType() != XMLStreamConstants.END_ELEMENT || !xmlr.getLocalName().equals("persona")){
-                        //prendo il tipo di tag
-                        String src = xmlr.getLocalName();
-                        //vado al valore
-                        xmlr.next();
-                        switch (src) {
-                            case "nome": nome = xmlr.getText(); break;
-                            case "cognome": cognome = xmlr.getText(); break;
-                            case "sesso": sesso = xmlr.getText().toUpperCase(); break;
-                            case "comune_nascita": comune = xmlr.getText(); break;
-                            case "data_nascita": data = xmlr.getText(); break;
-                        }
-                        //salto gli spazi inutili
-                        xmlr.next();xmlr.next();xmlr.next();
-                    }
-                    persone.addPersona(new Persona(id, cognome, nome, sesso, data, comune));
-                }
-                xmlr.next();
-            }
-        }catch (Exception e){
-            System.out.println(e);
-        }
-
-        return persone;
-    }	
+	    		case XMLStreamConstants.END_ELEMENT: 
+	    			if(xmlr.getLocalName().equals("persona") && id != -1 && !nome.equals("") && !cognome.equals("") && !sesso.equals("") && !comune.equals("") && !data.equals("")) {
+	    				persone.add(new Persona(id, cognome, nome, sesso, data, comune));
+	    				id = -1;
+	    				cognome = "";
+	    				nome = "";
+	    				sesso = "";
+	    				data = "";
+		        		comune = "";
+		        	}
+	    		case XMLStreamConstants.COMMENT: break;
+	    		case XMLStreamConstants.CHARACTERS: break;
+	    		}
+	    		xmlr.next();
+	    	}
+	    }
+	    catch(Exception e) {
+	    	System.out.println(e);
+	    }
+	    return persone;
+	}	
 }

@@ -36,12 +36,13 @@ public class XMLReaderCF extends GestoreXMLReader {
 		    		switch (src) {
                     	case "codice": cf = xmlr.getText(); break;
 		    		}
-
+		    		break;
 	    		case XMLStreamConstants.END_ELEMENT: 
 	    			if(!cf.equals("")) {
 		        		cfs.add(cf);
 		        		cf = "";
 		        	}
+	    			break;
 	    		case XMLStreamConstants.COMMENT: break;
 	    		case XMLStreamConstants.CHARACTERS: break;
 	    		}
