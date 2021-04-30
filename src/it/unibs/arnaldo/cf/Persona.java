@@ -12,6 +12,7 @@ public class Persona {
 	private int giorno;
 	private String comune;
 	private CodiceFiscale cf;
+	private boolean assente;
 	
 	public Persona(int id, String cognome, String nome, String sesso, String nascita, String comune) {
 		this.id = id;
@@ -23,6 +24,14 @@ public class Persona {
 		this.giorno = Integer.parseInt(nascita.substring(8,10));
 		this.comune = comune;
 		this.cf = null;
+		this.assente = true;
+	}
+	
+	public void setAssente(boolean tf) {
+		this.assente = tf;
+	}
+	public boolean isAssente() {
+		return this.assente;
 	}
 	
 	public void genCodiceFiscale() {

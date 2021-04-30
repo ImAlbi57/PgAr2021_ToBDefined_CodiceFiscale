@@ -1,7 +1,5 @@
 package it.unibs.arnaldo.cf;
 
-import it.unibs.arnaldo.cf.Persona.Sesso;
-
 public class Main {
 	public static void main(String args[]) {
 		/*ORACOLO PROTETTORE DEL CODICE, NON CANCELLARE*/
@@ -19,15 +17,17 @@ public class Main {
 		ElencoComuni.printAll();
 		System.out.println(ElencoComuni.getCodice("Padenghe sul Garda"));
 		*/
-		String cf = "LBRLUC01L05D284P";
-		System.out.println(CodiceFiscale.validateCF(cf));
 		
 		XMLReaderPersone xmlr = new XMLReaderPersone("inputPersone.xml");
 		Database persone = xmlr.read();
 		persone.genAll();
 		persone.readCfs();
+		persone.checkCfsValidi();
+		persone.checkCfsSpaiati();
+		//persone.checkPresenza();
 		//persone.printAllPersone();
+		persone.printAllPresenti();
 		//persone.printAllCFs();
-		//System.out.println(persone.cmpAll());
+		//persone.printAllCFsSpaiati();
 	}
 }
