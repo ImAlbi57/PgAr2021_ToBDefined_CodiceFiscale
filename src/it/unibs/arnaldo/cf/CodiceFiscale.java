@@ -20,7 +20,7 @@ public class CodiceFiscale {
 	* @param  cognome  Rossi
 	* @param  nome  Mario
 	* @param  sesso  Sesso.M
-	* @param  nacita  1990-05-21
+	* @param  nascita  1990-05-21
 	* @param  comune  Brescia
 	*/
 	public CodiceFiscale(String cognome, String nome, Sesso sesso, String nascita, String comune) {
