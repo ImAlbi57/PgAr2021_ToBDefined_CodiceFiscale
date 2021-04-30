@@ -12,6 +12,10 @@ import java.util.ArrayList;
  *
  */
 public class Database {
+	private static final String FEEDBACK_SCRITTURA_FILE = "Fine scrittura file.";
+	private static final String XML_OUTPUT_PERSONE = "codiciPersone.xml";
+	private static final String XML_CODICI_FISCALI = "codiciFiscali.xml";
+	private static final String XML_INPUT_PERSONE = "inputPersone.xml";
 	private ArrayList<Persona> persone;
 	private ArrayList<String> cfs;
 	private ArrayList<String> cfsInvalidi;
@@ -21,7 +25,7 @@ public class Database {
 	 * Metodo costruttore del database, crea l'arraylist di persone e metto a null gli altri
 	 */
 	public Database() {
-		XMLReaderPersone xmlr = new XMLReaderPersone("inputPersone.xml");
+		XMLReaderPersone xmlr = new XMLReaderPersone(XML_INPUT_PERSONE);
 		this.persone = xmlr.read();
 		cfs = null;
 		cfsInvalidi = null;
@@ -70,7 +74,7 @@ public class Database {
 	 * Istanzia la classe XMLReaderCF passando il path al costruttore e usa il metodo per la lettura
 	 */
 	public void readCfs() {
-		XMLReaderCF xmlrc = new XMLReaderCF("codiciFiscali.xml");
+		XMLReaderCF xmlrc = new XMLReaderCF(XML_CODICI_FISCALI);
 		cfs = xmlrc.read();
 	}
 	
@@ -80,9 +84,9 @@ public class Database {
 	 * Usa il metodo per la scrittura, passandogli gli arraylist di persone, cfsInvalidi, cfsSpaiati
 	 */
 	public void writeCfs() {
-		GestoreXMLWriter xmlw = new GestoreXMLWriter("codiciPersone.xml");
+		GestoreXMLWriter xmlw = new GestoreXMLWriter(XML_OUTPUT_PERSONE);
 		xmlw.scriviXML(persone, cfsInvalidi, cfsSpaiati);
-		System.out.println("Fine scrittura file.");
+		System.out.println(FEEDBACK_SCRITTURA_FILE);
 	}
 	
 	/**

@@ -9,6 +9,8 @@ import it.unibs.arnaldo.cf.Persona.Sesso;
  *
  */
 public class CodiceFiscale {
+	private static final String MESI = "ABCDEHLMPRST";
+	private static final String VOCALI = "AEIOU";
 	private String cf;
 	
 	/**
@@ -60,7 +62,7 @@ public class CodiceFiscale {
 	 * @return true or false
 	 */	
 	public static boolean isVowel(char c) {
-		String vowels = "AEIOU";
+		String vowels = VOCALI;
 		return vowels.indexOf(c) != -1;
 	}
 	
@@ -82,7 +84,7 @@ public class CodiceFiscale {
 	 * @return la posizione del mese nell'ArrayList 
 	 */
 	private static int getMonthPosition(char c) {
-		String mesi = "ABCDEHLMPRST";
+		String mesi = MESI;
 		return mesi.indexOf(c);
 	}
 	
