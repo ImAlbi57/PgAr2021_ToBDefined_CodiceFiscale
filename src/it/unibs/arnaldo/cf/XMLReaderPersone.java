@@ -2,12 +2,24 @@ package it.unibs.arnaldo.cf;
 
 import javax.xml.stream.XMLStreamConstants;
 
+
+/**
+ * Classe che visualizza le informazioni personali delle persone
+ * @author toBdefined
+ *
+ */
 public class XMLReaderPersone extends GestoreXMLReader {
 
 	public XMLReaderPersone(String path) {
 		super(path);
 	}
 	
+	
+	
+	/**
+	 * Lettura dei dati delle persone con successivo inserimento nell'ArrayList
+	 * @return l'ArrayList persone
+	 */
     public Database read() {
         Database persone= new Database();
 

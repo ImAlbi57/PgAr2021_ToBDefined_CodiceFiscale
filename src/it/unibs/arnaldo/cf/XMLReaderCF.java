@@ -4,12 +4,24 @@ import java.util.ArrayList;
 
 import javax.xml.stream.XMLStreamConstants;
 
+
+/**
+ * Classe che andrà a "leggere" in codici fiscali ereditando i metodi della classe astratta (GestoreXMLReader)
+ * @author toBdefined
+ *
+ */
 public class XMLReaderCF extends GestoreXMLReader {
 
 	public XMLReaderCF(String path) {
 		super(path);
 	}
 	
+	
+	/**
+	 * Lettura dei codiciFiscali.xml e andiamo ad aggiungere i vari codici fiscali all'interno dell'ArrayList cfs
+	 * In caso di eccezione, quest'ultima verrà stampata
+	 * @return l'ArrayList di codici fiscali
+	 */	
 	public ArrayList<String> read() {
 		ArrayList<String> cfs = new ArrayList<String>();
 		String cf = "";

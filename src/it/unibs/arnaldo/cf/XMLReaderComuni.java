@@ -4,12 +4,23 @@ import java.util.HashMap;
 
 import javax.xml.stream.XMLStreamConstants;
 
+
+/**
+ * Classe che andrà a "leggere" i comuni con i rispettivi nomi e codice ereditando i metodi della classe astratta (GestoreXMLReader)
+ * @author toBdefined
+ */
 public class XMLReaderComuni extends GestoreXMLReader {
 
 	public XMLReaderComuni(String path) {
 		super(path);
 	}
 	
+	
+	/**
+	 * Inserimento dei dati dei comuni tramite la lettura dei file XML 
+	 * In caso di eccezione, quest'ultima viene stampata
+	 * @return i comuni
+	 */
 	public HashMap<String,String> read() {
 		HashMap<String,String> comuni = new HashMap<String, String>();
 		String nome = "";

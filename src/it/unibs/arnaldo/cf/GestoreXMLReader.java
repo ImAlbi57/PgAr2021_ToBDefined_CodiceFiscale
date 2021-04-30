@@ -4,11 +4,23 @@ import java.io.FileInputStream;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamReader;
 
+/**
+ * Classe astratta che istanzia lo StreamReader
+ * @author toBdefined
+ *
+ */
 public abstract class GestoreXMLReader {
+	
+	//inizializzazione delle variabili
 	protected XMLInputFactory xmlif = null;
 	protected XMLStreamReader xmlr = null;
 	protected String path;
 
+	
+	/**
+	 * Istanziamento dello StreamReader e gestisce le eccezioni
+	 * @param path
+	 */	
     public GestoreXMLReader(String path){
         this.path = path;
         try {
@@ -20,6 +32,10 @@ public abstract class GestoreXMLReader {
         }
     }
 
+    
+    /**
+     * Getter di Xmlr
+     */
 	public XMLStreamReader getXmlr() {
 		return xmlr;
 	}

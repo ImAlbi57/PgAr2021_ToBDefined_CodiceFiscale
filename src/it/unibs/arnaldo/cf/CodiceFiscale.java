@@ -2,6 +2,12 @@ package it.unibs.arnaldo.cf;
 
 import it.unibs.arnaldo.cf.Persona.Sesso;
 
+
+/**
+ * Genera il codice fiscale e ne controlla la validità
+ * @author toBdefined
+ *
+ */
 public class CodiceFiscale {
 	private String cf;
 	
@@ -50,24 +56,35 @@ public class CodiceFiscale {
 		cf = new String(parts[0] + parts[1] + parts[2] + parts[3] + parts[4] + parts[5] + parts[6]);
 	}
 	
-	
 	/*METODI DI UTILITA'*/
-	//Ritorna true se il carattere passato è una vocale
+	
+	/**
+	 * Ritorna true se il carattere passato è una vocale
+	 * @param c
+	 * @return true or false
+	 */	
 	public static boolean isVowel(char c) {
 		String vowels = "AEIOU";
 		return vowels.indexOf(c) != -1;
 	}
-	/*//Ritorna true se il carattere passato è un numero [SOSTITUITO DA Character.isDigit(char c)]
-	public boolean isNumber(char c) {
-		String vowels = "0123456789";
-		return vowels.indexOf(c) != -1;
-	}*/	
-	//Ritorna il carattere corrispondente al numero del mese passato
+	
+	
+	/**
+	 * Ritorna il carattere corrispondente al numero del mese passato
+	 * @param mese
+	 * @return carattere associato al mese 
+	 */
 	private static char getMonth(int mese) {
 		char mesi[] = {'A','B','C','D','E','H','L','M','P','R','S','T'};
 		return mesi[mese-1];
 	}
-	//Ritorna true se il carattere passato rappresenta un mese
+	
+	
+	/**
+	 * Ritorna true se il carattere passato rappresenta un mese
+	 * @param c
+	 * @return la posizione del mese nell'ArrayList 
+	 */
 	private static int getMonthPosition(char c) {
 		String mesi = "ABCDEHLMPRST";
 		return mesi.indexOf(c);
@@ -76,7 +93,11 @@ public class CodiceFiscale {
 	
 	/*METODI PER CREARE E CONTROLLARE IL CF*/
 	
-	//Metodo per generare nome e cognome
+	
+	/**
+	 * Metodo per generare nome e cognome nel codice fiscale 
+	 * @return i caratteri che nel codice rappresetano il nome e il cognome
+	 */	
 	private static String generate3Chars(String part) {
 		char src[] = part.toCharArray();
 		String chars = "";
@@ -99,6 +120,11 @@ public class CodiceFiscale {
 		return chars;
 	}
 	
+	/**
+	 * Ricerca del carattere di controllo seguendo un algoritmo
+	 * @param partialCF
+	 * @return il carattere finale di controllo
+	 */
 	private static char getControllo(String partialCF) {
 		//Caratteri di controllo per le posizioni dispari (vedi tabella), le pari corrispondono al numero/lettera
 		int dispari[] = {1,0,5,7,9,13,15,17,19,21,1,0,5,7,9,13,15,17,19,21,2,4,18,20,11,3,6,8,12,14,16,10,22,25,24,23};
@@ -127,6 +153,12 @@ public class CodiceFiscale {
 	}
 	
 	
+	/**
+	 * Controllo di ogni "parte" che mi genera il codice fiscale (nome, congome, data di nascita...)
+	 * Grazie al controllo verifico se il codice è corretto o no
+	 * @param cf
+	 * @return true se è tutto corretto altrimenti false se una "parte" è errata
+	 */
 	public static boolean validateCF(String cf) {
 		//Rimuovo i caratteri inutili e prendo la stringa in maiuscolo
 		cf = cf.trim().toUpperCase();
@@ -212,8 +244,9 @@ public class CodiceFiscale {
 		return true;
 	}
 	
-	
-	//Metodo toString
+	/**
+	 * Metodo toString
+	 */
 	public String toString() {
 		return cf;
 	}
