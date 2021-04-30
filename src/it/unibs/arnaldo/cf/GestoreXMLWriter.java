@@ -17,6 +17,7 @@ public class GestoreXMLWriter {
 	private XMLStreamWriter xmlw = null;
 	private int nTabs = 0;
 	
+	//Metodo costruttore del writer, crea un writer dato il path
 	public GestoreXMLWriter(String path) {
 		try {
 			xmlof = XMLOutputFactory.newInstance();
@@ -27,6 +28,8 @@ public class GestoreXMLWriter {
 		}
 	}
 	
+	//Metodo per la scrittura dell'XML completo,
+	//semplicemente richiama i metodi creati in seguito, usati opportunamente e con dei cicli
 	public void scriviXML(ArrayList<Persona> persone, ArrayList<String> cfsInvalidi, ArrayList<String> cfsSpaiati) {
 		try {
 			iniziaXML();
@@ -53,25 +56,32 @@ public class GestoreXMLWriter {
 					chiudiTag();
 					
 				chiudiTag();
-			xmlw.writeEndDocument();
-			xmlw.flush();
-			xmlw.close();
+			chiudiXML();
 		} catch (Exception e) {
-			System.out.println("HAI ROTTO TUTTO FRATELLI'");
 			System.out.println(e.getMessage());
 		}
 	}
 
+	//Metodo che inizia il file XML, scrivendo l'intestazione
 	private void iniziaXML() throws XMLStreamException {
 		xmlw.writeStartDocument("utf-8", "1.0");aCapo();
 	}
 
+	//Metodo che termina l'XML, scrive i dati immagazzinati nella cache, dentro il file e chiude
+	private void chiudiXML() throws XMLStreamException {
+		xmlw.writeEndDocument();
+		xmlw.flush();
+		xmlw.close();
+	}
+
+	//Metodo da usare per aprire i tag
 	private void apriTag(String s) throws XMLStreamException {
 		tabula(nTabs++);
 		xmlw.writeStartElement(s);
 		aCapo();
 	}
-	
+
+	//Metodo da usare per aprire i tag con attributo
 	private void apriTagConAttr(String s, String attr, String val) throws XMLStreamException {
 		tabula(nTabs++);
 		xmlw.writeStartElement(s);
@@ -79,12 +89,14 @@ public class GestoreXMLWriter {
 		aCapo();
 	}
 
+	//Metodo da usare per chiudere i tag
 	private void chiudiTag() throws XMLStreamException {
 		tabula(--nTabs);
 		xmlw.writeEndElement();
 		aCapo();
 	}
 
+	//Metodo da usare per la scrittura di una persona
 	private void writePersona(Persona p) throws XMLStreamException {
 		tabula(nTabs++);
 		xmlw.writeStartElement("persona");
@@ -99,7 +111,8 @@ public class GestoreXMLWriter {
 		writeSimpleTag("codice_fiscale", (p.isAssente() ? "ASSENTE" : p.getCf()));
 		chiudiTag();
 	}
-	
+
+	//Metodo da usare per la scrittura dei tag semplici (=solo testo, no attributi, no sotto-tag)
 	public void writeSimpleTag(String tagName, String characters) {
 		try {
 			tabula(nTabs);
@@ -111,7 +124,8 @@ public class GestoreXMLWriter {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
+	//Metodo da usare per inserire n tabulazioni
 	public void tabula(int n) {
 		try {
 			for(;n>0;n--)
@@ -120,7 +134,8 @@ public class GestoreXMLWriter {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
+	//Metodo da usare per andare a capo
 	public void aCapo() {
 		try {
 			xmlw.writeCharacters("\r\n");
