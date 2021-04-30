@@ -19,15 +19,19 @@ public class Main {
 		*/
 		
 		XMLReaderPersone xmlr = new XMLReaderPersone("inputPersone.xml");
-		Database persone = xmlr.read();
-		persone.genAll();
-		persone.readCfs();
-		persone.checkCfsValidi();
-		persone.checkCfsSpaiati();
+		Database db = xmlr.read();
+		db.genAll();
+		db.readCfs();
+		db.checkCfsValidi();
+		db.checkCfsSpaiati();
 		//persone.checkPresenza();
 		//persone.printAllPersone();
-		persone.printAllPresenti();
+		//persone.printAllPresenti();
 		//persone.printAllCFs();
 		//persone.printAllCFsSpaiati();
+		
+		GestoreXMLWriter xmlw = new GestoreXMLWriter("codiciPersone.xml");
+		xmlw.scriviXML(db.getPersone(), db.getCfsInvalidi(), db.getCfsSpaiati());
+		System.out.println("FINE");
 	}
 }

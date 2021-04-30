@@ -14,6 +14,18 @@ public class Database {
 		cfsInvalidi = null;
 	}
 	
+	//Getters
+	public ArrayList<Persona> getPersone(){
+		return persone;
+	}
+	public ArrayList<String> getCfsInvalidi(){
+		return cfsInvalidi;
+	}
+	public ArrayList<String> getCfsSpaiati(){
+		return cfsSpaiati;
+	}
+	
+	
 	public void addPersona(Persona p) {
 		persone.add(p);
 	}
