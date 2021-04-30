@@ -11,9 +11,11 @@ public class Main {
 		Database db = new Database();
 		db.genAll();
 		db.readCfs();
-		db.checkCfsValidi();
-		db.checkCfsSpaiati();
-		db.writeCfs();
+		//db.checkCfsValidi();
+		//db.checkCfsSpaiati();
+		//db.writeCfs();
+		
+		System.out.println(CodiceFiscale.validateCF("NKLKLD52B69B865C"));
 		
 		
 		/*

@@ -96,7 +96,7 @@ public class Database {
 		while(i < cfs.size()) {
 			if(CodiceFiscale.validateCF(cfs.get(i)) == false) {
 				cfsInvalidi.add(cfs.get(i));
-				cfs.remove(cfs.get(i));
+				cfs.remove(i);
 			}
 			else i++;
 		}

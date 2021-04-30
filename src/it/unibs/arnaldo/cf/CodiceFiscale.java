@@ -171,12 +171,13 @@ public class CodiceFiscale {
 		/*****COGNOME E NOME*****/
 		//Controllo che i primi 6 caratteri siano compresi tra A e Z
 		for(int i=0; i<6; i++)
-			if(caratteri[i] <= 'A' || caratteri[i] >= 'Z')
+			if(caratteri[i] < 'A' || caratteri[i] > 'Z')
 				return false;
 		//Controllo la validità dei nomi e dei cognomi
 		String cognome = cf.substring(0,3);
 		String nome = cf.substring(3,6);
-		if(!cognome.equals(generate3Chars(cognome)) || !nome.equals(generate3Chars(nome)))
+		//Se il nome o il cognome non passa la verifica ritorno false
+		if(!checkNominativo(cognome) || !checkNominativo(nome))
 			return false;
 		/*****COGNOME E NOME*****/
 		
@@ -236,6 +237,24 @@ public class CodiceFiscale {
 			return false;
 		/*****CARATTERE DI CONTROLLO*****/
 
+		
+		return true;
+	}
+	
+	/**
+	 * Verifica che il nome (o cognome) siano validi
+	 * @param str nome/cognome
+	 * @return true/false
+	 */
+	public static boolean checkNominativo(String str) {
+		char caratteri[] = str.toCharArray();
+		int i;
+		//Scorro fino alla prima vocale
+		for(i=0; i<caratteri.length && !isVowel(caratteri[i]); i++);
+		for(; i<caratteri.length; i++) {
+			if(!isVowel(caratteri[i]) && caratteri[i] != 'X')
+				return false;
+		};
 		
 		return true;
 	}
