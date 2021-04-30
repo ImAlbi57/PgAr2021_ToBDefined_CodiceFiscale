@@ -21,12 +21,12 @@ public class Database {
 	}
 	
 	public ArrayList<String> checkCfs(){
-		ArrayList<String> sbagliati = new ArrayList<String>();
+		ArrayList<String> invalidi = new ArrayList<String>();
 		for(String cf:cfs) {
 			if(CodiceFiscale.validateCF(cf) == false)
-				sbagliati.add(cf);
+				invalidi.add(cf);
 		}
-		return sbagliati;
+		return invalidi;
 	}
 	
 	public void genAll() {
