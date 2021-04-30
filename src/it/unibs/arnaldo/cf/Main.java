@@ -6,6 +6,8 @@ public class Main {
 		System.out.println("Se non va mi uccido");
 		/*ORACOLO PROTETTORE DEL CODICE, NON CANCELLARE*/
 		
+		ElencoComuni.init();
+		
 		Database db = new Database();
 		db.genAll();
 		db.readCfs();

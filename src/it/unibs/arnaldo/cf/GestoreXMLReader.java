@@ -10,15 +10,14 @@ import javax.xml.stream.XMLStreamReader;
  *
  */
 public abstract class GestoreXMLReader {
-	
-	//dichiarazione delle variabili
+	//Gli attributi sono protected per evitare di dover richiamare continuamente i get nelle classi che ereditano
 	protected XMLInputFactory xmlif = null;
 	protected XMLStreamReader xmlr = null;
 	protected String path;
 
 	
 	/**
-	 * Istanziamento dello StreamReader con gestione delle eccezioni
+	 * Istanzia lo StreamReader e gestisce le eccezioni
 	 * @param path percorso del file
 	 */	
     public GestoreXMLReader(String path){
@@ -31,12 +30,4 @@ public abstract class GestoreXMLReader {
             System.out.println(e.getMessage());
         }
     }
-
-    
-    /**
-     * Getter di Xmlr
-     */
-	public XMLStreamReader getXmlr() {
-		return xmlr;
-	}
 }

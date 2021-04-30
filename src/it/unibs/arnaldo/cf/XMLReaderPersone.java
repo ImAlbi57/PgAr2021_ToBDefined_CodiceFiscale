@@ -7,11 +7,16 @@ import javax.xml.stream.XMLStreamConstants;
 
 /**
  * Classe che visualizza le informazioni personali delle persone
+ * Estende GestoreXMLReader
  * @author toBdefined
  *
  */
 public class XMLReaderPersone extends GestoreXMLReader {
 
+	/**
+	 * Richiama il costruttore della superclasse e gli passa il path
+	 * @param path percorso del file
+	 */
 	public XMLReaderPersone(String path) {
 		super(path);
 	}
@@ -19,7 +24,7 @@ public class XMLReaderPersone extends GestoreXMLReader {
 	
 	
 	/**
-	 * Lettura dei dati delle persone con successivo inserimento nell'ArrayList
+	 * Legge i dati delle persone e li inserisce nell'ArrayList
 	 * @return l'ArrayList persone
 	 */
 	public ArrayList<Persona> read() {

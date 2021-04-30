@@ -18,13 +18,10 @@ public class CodiceFiscale {
 	* @param  cognome  Rossi
 	* @param  nome  Mario
 	* @param  sesso  Sesso.M
-	* @param  anno  1990
-	* @param  mese  5
-	* @param  giorno  21
+	* @param  nacita  1990-05-21
 	* @param  comune  Brescia
 	*/
 	public CodiceFiscale(String cognome, String nome, Sesso sesso, String nascita, String comune) {
-		/*PROCEDURA PER GENERARE IL CF DATE LE INFO DELLA PERSONA*/
 		String parts[] = new String[8];
 		
 		//Genero le parti di nome e cognome
@@ -45,7 +42,7 @@ public class CodiceFiscale {
 		parts[4] = String.format("%02d", giorno);
 		
 		
-		//Comune, necessaria la lettura da tastiera
+		//Comune
 		parts[5] = ElencoComuni.getCodice(comune);
 		
 		//Codice di controllo
@@ -59,7 +56,7 @@ public class CodiceFiscale {
 	
 	/**
 	 * Ritorna true se il carattere passato è una vocale
-	 * @param c
+	 * @param c 'A'
 	 * @return true or false
 	 */	
 	public static boolean isVowel(char c) {
@@ -70,7 +67,7 @@ public class CodiceFiscale {
 	
 	/**
 	 * Ritorna il carattere corrispondente al numero del mese passato
-	 * @param mese
+	 * @param mese 11
 	 * @return carattere associato al mese 
 	 */
 	private static char getMonth(int mese) {
@@ -81,7 +78,7 @@ public class CodiceFiscale {
 	
 	/**
 	 * Ritorna true se il carattere passato rappresenta un mese
-	 * @param c
+	 * @param c 'D'
 	 * @return la posizione del mese nell'ArrayList 
 	 */
 	private static int getMonthPosition(char c) {
@@ -91,11 +88,10 @@ public class CodiceFiscale {
 	
 	
 	/*METODI PER CREARE E CONTROLLARE IL CF*/
-	
-	
 	/**
 	 * Metodo per generare nome e cognome nel codice fiscale 
-	 * @return i caratteri che nel codice rappresetano il nome e il cognome
+	 * @param part stringa contenente il nome o il cognome
+	 * @return stringa contenente i caratteri che nel codice rappresetano il nome e il cognome
 	 */	
 	private static String generate3Chars(String part) {
 		char src[] = part.toCharArray();
@@ -120,8 +116,8 @@ public class CodiceFiscale {
 	}
 	
 	/**
-	 * Ricerca del carattere di controllo seguendo un algoritmo
-	 * @param partialCF
+	 * Ricerca del carattere di controllo seguendo l'algoritmo ufficiale (fonte: wiki)
+	 * @param partialCF stringa contenente la parte precedente al carattere di controllo del codice fiscale
 	 * @return il carattere finale di controllo
 	 */
 	private static char getControllo(String partialCF) {
@@ -153,9 +149,9 @@ public class CodiceFiscale {
 	
 	
 	/**
-	 * Controllo di ogni "parte" che mi genera il codice fiscale (nome, congome, data di nascita...)
-	 * Grazie al controllo verifico se il codice è corretto o no
-	 * @param cf
+	 * Controllo del codice fiscale suddiviso ogni "parte" (nome, congome, data di nascita...)
+	 * Ritorna true se il codice controllato è valido
+	 * @param cf stringa con il codice fiscale
 	 * @return true se è tutto corretto altrimenti false se una "parte" è errata
 	 */
 	public static boolean validateCF(String cf) {
@@ -168,6 +164,7 @@ public class CodiceFiscale {
 		
 		//Creo un array di caratteri dalla nostra stringa
 		char caratteri[] = cf.toCharArray();
+		
 		
 		/*****INIZIO DEI CONTROLLI*****/
 		
@@ -238,13 +235,14 @@ public class CodiceFiscale {
 		if(caratteri[15] != getControllo(cf.substring(0,15)))
 			return false;
 		/*****CARATTERE DI CONTROLLO*****/
-		
+
 		
 		return true;
 	}
 	
 	/**
 	 * Metodo toString
+	 * @return ritorna il codice fiscale
 	 */
 	public String toString() {
 		return cf;
