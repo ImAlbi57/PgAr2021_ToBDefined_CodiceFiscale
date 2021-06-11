@@ -90,7 +90,7 @@ public class GestoreXMLWriter {
 
 	/**
 	 * Metodo da usare per aprire i tag (tabula, stampa e va a capo)
-	 * @param s stringa del nome del tag
+	 * @param tagName stringa del nome del tag
 	 * @throws XMLStreamException
 	 */
 	private void apriTag(String tagName) throws XMLStreamException {
@@ -101,7 +101,7 @@ public class GestoreXMLWriter {
 
 	/**
 	 * Metodo da usare per aprire i tag con attributo (tabula, stampa e va a capo)
-	 * @param s stringa col nome del tag
+	 * @param tagName stringa col nome del tag
 	 * @param attr stringa col nome dell'attributo
 	 * @param val stringa col valore dell'attributo
 	 * @throws XMLStreamException
